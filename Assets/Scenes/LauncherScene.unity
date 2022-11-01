@@ -1476,3 +1476,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playButton: {fileID: 45320274}
+  quitButton: {fileID: 1140416298}
