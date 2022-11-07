@@ -53,15 +53,6 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Fire"",
-                    ""type"": ""Button"",
-                    ""id"": ""deb96809-1a26-4464-b539-6555e29e2ab4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,17 +198,6 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
                     ""action"": ""MovementUpDownVector"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""01626294-57c5-4a34-baa5-5bf74a40fe57"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Fire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -246,7 +226,6 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
         m_VesselActions_MovementVector = m_VesselActions.FindAction("MovementVector", throwIfNotFound: true);
         m_VesselActions_MouseXY = m_VesselActions.FindAction("MouseXY", throwIfNotFound: true);
         m_VesselActions_MovementUpDownVector = m_VesselActions.FindAction("MovementUpDownVector", throwIfNotFound: true);
-        m_VesselActions_Fire = m_VesselActions.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -309,7 +288,6 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_VesselActions_MovementVector;
     private readonly InputAction m_VesselActions_MouseXY;
     private readonly InputAction m_VesselActions_MovementUpDownVector;
-    private readonly InputAction m_VesselActions_Fire;
     public struct VesselActionsActions
     {
         private @VesselControls m_Wrapper;
@@ -317,7 +295,6 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
         public InputAction @MovementVector => m_Wrapper.m_VesselActions_MovementVector;
         public InputAction @MouseXY => m_Wrapper.m_VesselActions_MouseXY;
         public InputAction @MovementUpDownVector => m_Wrapper.m_VesselActions_MovementUpDownVector;
-        public InputAction @Fire => m_Wrapper.m_VesselActions_Fire;
         public InputActionMap Get() { return m_Wrapper.m_VesselActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -336,9 +313,6 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
                 @MovementUpDownVector.started -= m_Wrapper.m_VesselActionsActionsCallbackInterface.OnMovementUpDownVector;
                 @MovementUpDownVector.performed -= m_Wrapper.m_VesselActionsActionsCallbackInterface.OnMovementUpDownVector;
                 @MovementUpDownVector.canceled -= m_Wrapper.m_VesselActionsActionsCallbackInterface.OnMovementUpDownVector;
-                @Fire.started -= m_Wrapper.m_VesselActionsActionsCallbackInterface.OnFire;
-                @Fire.performed -= m_Wrapper.m_VesselActionsActionsCallbackInterface.OnFire;
-                @Fire.canceled -= m_Wrapper.m_VesselActionsActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_VesselActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -352,9 +326,6 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
                 @MovementUpDownVector.started += instance.OnMovementUpDownVector;
                 @MovementUpDownVector.performed += instance.OnMovementUpDownVector;
                 @MovementUpDownVector.canceled += instance.OnMovementUpDownVector;
-                @Fire.started += instance.OnFire;
-                @Fire.performed += instance.OnFire;
-                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -373,6 +344,5 @@ public partial class @VesselControls : IInputActionCollection2, IDisposable
         void OnMovementVector(InputAction.CallbackContext context);
         void OnMouseXY(InputAction.CallbackContext context);
         void OnMovementUpDownVector(InputAction.CallbackContext context);
-        void OnFire(InputAction.CallbackContext context);
     }
 }
