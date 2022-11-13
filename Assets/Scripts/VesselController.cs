@@ -35,6 +35,8 @@ public class VesselController : MonoBehaviour
         this.vesselRigidBody = this.vessel.GetComponent<Rigidbody>();
 
         targetGlobalRotation = transform.rotation;
+        
+        Physics.IgnoreLayerCollision(6, 7);
     }
 
     private void OnEnable()
