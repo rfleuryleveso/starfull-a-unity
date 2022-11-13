@@ -11,8 +11,8 @@ public class LauncherMenu : MonoBehaviour
     [SerializeField] private Button difficultyButton;
     [SerializeField] private Button quitButton;
     
-    public GameObject EnableDifficulty; //choisit l'objet à faire apparaitre
-    public GameObject DisableDifficulty; //choisit l'objet à faire disparaitre
+    [SerializeField] private GameObject EnableDifficulty; //choisit l'objet à faire apparaitre
+    [SerializeField] private GameObject DisableDifficulty; //choisit l'objet à faire disparaitre
     
     [SerializeField] private Button easyButton;
     [SerializeField] private Button normalButton;
