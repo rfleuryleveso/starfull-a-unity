@@ -14,12 +14,22 @@ public class LauncherMenu : MonoBehaviour
     public GameObject EnableDifficulty; //choisit l'objet à faire apparaitre
     public GameObject DisableDifficulty; //choisit l'objet à faire disparaitre
     
-
+    [SerializeField] private Button easyButton;
+    [SerializeField] private Button normalButton;
+    [SerializeField] private Button hardButton;
+    [SerializeField] private Button backButton;
+    
+    public static int difficulty = 0;
+    
     private void Start()
     {
         playButton.onClick.AddListener(this.HandlePlayButton);
         difficultyButton.onClick.AddListener(this.HandleDifficultyButton);
         quitButton.onClick.AddListener(this.HandleQuitButton);
+        easyButton.onClick.AddListener(this.HandleEasyButton);
+        normalButton.onClick.AddListener(this.HandleNormalButton);
+        hardButton.onClick.AddListener(this.HandleHardButton);
+        backButton.onClick.AddListener(this.HandleBackButton);
     }
 
     private void HandlePlayButton()
@@ -36,5 +46,26 @@ public class LauncherMenu : MonoBehaviour
     private void HandleQuitButton()
     {
         Application.Quit();
+    }
+    
+    private void HandleEasyButton()
+    {
+        difficulty = 1;
+    }
+    
+    private void HandleNormalButton()
+    {
+        difficulty = 2;
+    }
+    
+    private void HandleHardButton()
+    {
+        difficulty = 3;
+    }
+    
+    private void HandleBackButton()
+    {
+        EnableDifficulty.SetActive(false);
+        DisableDifficulty.SetActive(true);
     }
 }
