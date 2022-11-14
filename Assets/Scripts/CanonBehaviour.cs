@@ -14,8 +14,15 @@ public class CanonBehaviour : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Rigidbody vesselRigidbody;
 
-    public void Shoot()
+    public void Shoot(GameObject target)
     {
-        Instantiate(projectilePrefab, this.transform);
+        
+        GameObject instantiatedObject = Instantiate(projectilePrefab, this.transform);
+        // If instantiatedObject is not null, set the initial transform of the project to look at the target
+        // when AddRelativeForce is invoked, the projectile will go toward the target
+        if (target != null)
+        {
+            instantiatedObject.transform.LookAt(target.transform);
+        }   
     }
 }

@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Cache = UnityEngine.Cache;
 
 public class MenuInGame : MonoBehaviour
 {
-    public GameObject MenuPause; //choisit l'objet à faire apparaitre (ici on prend le canvas)
-    private bool IsPaused = false;
+    [SerializeField] private GameObject HealthBarHidden;
     
-    [SerializeField] private Button BackToGameButton;
+    [SerializeField] private GameObject MenuPause;
+
+    [SerializeField] private Button ResumeButton;
     [SerializeField] private Button QuitButton;
     
     
     private void Start()
     {
-        BackToGameButton.onClick.AddListener(this.HandleBackButton);
+        // événements des boutons
+        ResumeButton.onClick.AddListener(this.HandleResumeButton);
         QuitButton.onClick.AddListener(this.HandleQuitButton);
     }
 
@@ -24,25 +28,32 @@ public class MenuInGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            // Cache le dashboard
+            HealthBarHidden.SetActive(false);
+            // arrète le temps
             Time.timeScale = 0;
-            Debug.Log("Escape key was pressed");
+            // stop la génération des ennemis
+            GenerationBots.isPaused = true;
+            // active l'UI du menu
             MenuPause.SetActive(true);
-            MonDéplacement.isTalking = true; // bloque le mouvement de camera
             Cursor.lockState = CursorLockMode.None; //permet de pouvoir utiliser sa souris
             Cursor.visible = true; // affiche le curseur de la souris
         }
     }
-    private void HandleBackButton()
+    private void HandleResumeButton()
     {
+        // viens rétablir tous les paramètres précédemment changés, pour pouvoir reprendre la partie
+        HealthBarHidden.SetActive(true);
         Time.timeScale = 1;
+        GenerationBots.isPaused = false;
         MenuPause.SetActive(false);
-        MonDéplacement.isTalking = false; // débloque le mouvement de camera
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false; // cache le curseur de la souris
     }
 
     private void HandleQuitButton()
     {
+        // ferme le jeu
         Application.Quit();
     }
 }

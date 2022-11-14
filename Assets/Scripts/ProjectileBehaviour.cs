@@ -17,5 +17,12 @@ public class ProjectileBehaviour : MonoBehaviour
         Destroy(this);
         yield break; //Is this even needed?
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject otherObject = other.gameObject;
+        Destroy(otherObject);
+        Destroy(this);
+    }
 
 }
